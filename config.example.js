@@ -1,5 +1,5 @@
 module.exports = {
-	EMAIL_SUBJECT: 'Duga ping alert',
+	EMAIL_SUBJECT: 'URL status alert',
 	EMAIL_TO: 'recipient@domain.com',
 	SENDER_MAIL: 'your+email@domain.com',
 	SENDER_NAME: 'Sender name',
