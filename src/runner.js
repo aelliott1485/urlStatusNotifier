@@ -5,5 +5,5 @@ const {checkStatus} = require('./statusChecker');
 const checkInterval = setInterval(checkStatus, 60000);
 checkStatus();
 function exceptionHandler(e) {
-	clearInterval(checkInterval);
+    clearInterval(checkInterval);
 }
