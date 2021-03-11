@@ -1,3 +1,5 @@
+"use strict";
+
 const https = require('https');
 const nodemailer = require('nodemailer');
 const {EMAIL_SUBJECT, EMAIL_TO, SENDER_MAIL, SENDER_NAME, SENDER_PASS, URL_TO_CHECK} = require(__dirname + '/../config');
