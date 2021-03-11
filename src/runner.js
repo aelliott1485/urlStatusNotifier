@@ -1,3 +1,5 @@
+"use strict";
+
 const https = require('https');
 const nodemailer = require('nodemailer');
 const {checkStatus} = require('./statusChecker');
