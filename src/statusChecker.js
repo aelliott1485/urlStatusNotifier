@@ -9,7 +9,6 @@ module.exports = {
 function handleResponse(config, response) {
 	const code = typeof response === 'undefined' ? 0 : response.status;
     if (code !== (config.lastCode || config.EXPECTED_STATUS)) {
-		console.log('calling sendEmail');
         sendEmail(config, code);
     }
     config.lastCode = code;

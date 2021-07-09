@@ -11,7 +11,6 @@ configs.forEach(async config => {
 	const minutes = config.INTERVAL_MINUTES || 1;
     const checkInterval = setInterval(boundCall, minutes * 60000);
     await boundCall();
-	//console.log('config after call: ', config)
     function exceptionHandler(e) {
         clearInterval(checkInterval);
     }
