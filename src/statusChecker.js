@@ -2,20 +2,9 @@
 
 const axios = require('axios');
 const nodemailer = require('nodemailer');
-/*const {EMAIL_SUBJECT,
-	EMAIL_TO, 
-	EXPECTED_STATUS = 200, 
-	SENDER_MAIL, 
-	SENDER_NAME, 
-	SENDER_PASS, 
-	URL_TO_CHECK
-} = require(__dirname + '/../config');*/
-
-
 module.exports = {
     checkStatus
 };
-//let lastCode = EXPECTED_STATUS;
 
 function handleResponse(config, response) {
 	const code = typeof response === 'undefined' ? 0 : response.status;
@@ -24,7 +13,6 @@ function handleResponse(config, response) {
         sendEmail(config, code);
     }
     config.lastCode = code;
-	//console.log('----------- set lastCode in config to ', response.statusCode);
 }
 async function sendEmail(config, code) {
     const text = `status code from ${config.URL_TO_CHECK}: ${code}`;
@@ -46,10 +34,6 @@ async function sendEmail(config, code) {
         html: `<b>${text}</b>`, // html body
       });
 	console.log("Message sent: %s", info.messageId);
-  // Message sent: <b658f8ca-6296-ccf4-8306-87d57a0b4321@example.com>
-
-  // Preview only available when sending through an Ethereal account
-  //console.log("Preview URL: %s", nodemailer.getTestMessageUrl(info));
 }
 function errorHandler(config, error) {
     console.log('error', error);
@@ -57,7 +41,6 @@ function errorHandler(config, error) {
         sendEmail(config, error.code);
     }
     config.lastCode = error.code;
-    //clearInterval()
 }
 
 async function checkStatus(config) {
