@@ -20,7 +20,7 @@ Copy the example configuration
 
 Modify config.js accordingly. It can contain an array of options - for example:
 
-   module.exports = [
+    module.exports = [
     {
         subject: 'test URL Check',		//Email Subject 
         to: 'recipient@email.com',		//Recipient email addresses
