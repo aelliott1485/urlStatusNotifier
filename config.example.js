@@ -5,7 +5,7 @@ module.exports = [
         expected: 200,
         intervalMinutes: 5,
         user: 'sender@email.com',
-        sender: 'Zomis Games Check',
+        sender: 'URL check notifier',
         pass: 'PW_FROM_EMAIL',
         url: 'https://example.com/'
     }

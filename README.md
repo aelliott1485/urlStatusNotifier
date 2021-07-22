@@ -27,7 +27,7 @@ Modify config.js accordingly. It can contain an array of options - for example:
         expected: 200,					//Expected status code
         intervalMinutes: 5,				//number of minutes to check
         user: 'sender@email.com',		//Sender Email address
-        sender: 'Zomis Games Check',	//Sender Name
+        sender: 'URL check notifier',	//Sender Name
         pass: 'PW_FROM_EMAIL',			//app password - see https://nodemailer.com/usage/using-gmail/
         url: 'https://example.com/'		//URL to check
     }
