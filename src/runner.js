@@ -8,7 +8,7 @@ const {checkStatus} = require('./statusChecker');
 
 configs.forEach(async config => {
     const boundCall = checkStatus.bind(null, config);
-	const minutes = config.INTERVAL_MINUTES || 1;
+	const minutes = config.intervalMinutes || 1;
     const checkInterval = setInterval(boundCall, minutes * 60000);
     await boundCall();
     function exceptionHandler(e) {

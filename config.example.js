@@ -1,8 +1,12 @@
-module.exports = {
-    EMAIL_SUBJECT: 'URL status alert',
-    EMAIL_TO: 'recipient@domain.com',
-    SENDER_MAIL: 'your+email@domain.com',
-    SENDER_NAME: 'Sender name',
-    SENDER_PASS: 'Email password',
-    URL_TO_CHECK: 'https://'
-};
+module.exports = [
+    {
+        subject: 'test URL Check',
+        to: 'recipient@email.com',
+        expected: 200,
+        intervalMinutes: 5,
+        user: 'sender@email.com',
+        sender: 'Zomis Games Check',
+        pass: 'PW_FROM_EMAIL',
+        url: 'https://example.com/'
+    }
+];

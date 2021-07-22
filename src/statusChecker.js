@@ -8,27 +8,27 @@ module.exports = {
 
 function handleResponse(config, response) {
 	const code = typeof response === 'undefined' ? 0 : response.status;
-    if (code !== (config.lastCode || config.EXPECTED_STATUS)) {
+    if (code !== (config.lastCode || config.expected)) {
         sendEmail(config, code);
     }
     config.lastCode = code;
 }
 async function sendEmail(config, code) {
-    const text = `status code from ${config.URL_TO_CHECK}: ${code}`;
+    const text = `status code from ${config.url}: ${code}`;
     const transporter = nodemailer.createTransport({
         service:'gmail',
         secure: false,
         auth: {
-           user: config.SENDER_MAIL,
-           pass: config.SENDER_PASS
+           user: config.user,
+           pass: config.pass
         },
         debug: false,
         logger: true
     });
     const info = await transporter.sendMail({
-        from: `"${config.SENDER_NAME}" <${config.SENDER_MAIL}>`, // sender address
-        to: config.EMAIL_TO, // list of receivers
-        subject: config.EMAIL_SUBJECT, // Subject line
+        from: `"${config.sender}" <${config.user}>`, // sender address
+        to: config.to, // list of receivers
+        subject: config.subject, // Subject line
         text, // plain text body
         html: `<b>${text}</b>`, // html body
       });
@@ -43,8 +43,8 @@ function errorHandler(config, error) {
 }
 
 async function checkStatus(config) {
-    console.log(`CHECKING STATUS of ${config.URL_TO_CHECK}`, (new Date()).toLocaleString());
-    const response = await axios.get(config.URL_TO_CHECK).catch(errorHandler.bind(null, config));
+    console.log(`CHECKING STATUS of ${config.url}`, (new Date()).toLocaleString());
+    const response = await axios.get(config.url).catch(errorHandler.bind(null, config));
 	handleResponse(config, response);
 }
 function exceptionHandler(e) {
