@@ -4,7 +4,7 @@ This utility will check URLs at intervals and notify recipient(s) when the statu
 ## Configuration
 Clone repository
 
-   git clone https://github.com/aelliott1485/urlStatusNotifier.git
+    git clone https://github.com/aelliott1485/urlStatusNotifier.git
 
 Change to directory
 
