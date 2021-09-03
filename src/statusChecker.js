@@ -8,13 +8,14 @@ module.exports = {
 
 function handleResponse(config, response) {
 	const code = typeof response === 'undefined' ? 0 : response.status;
-    if (code !== (config.lastCode || config.expected)) {
-        sendEmail(config, code);
-    }
-    config.lastCode = code;
+	const wasFailing = config.failing || false;
+    config.failing = (code !== config.expected);
+	if (wasFailing ^ config.failing) {
+		sendEmail(config, code);
+	}
 }
-async function sendEmail(config, code) {
-    const text = `status code from ${config.url}: ${code}`;
+async function sendEmail(config, code, message) {
+    const text = `status code from ${config.url}: ${code}` + (message ? ' message: ' + message : '');
     const transporter = nodemailer.createTransport({
         service:'gmail',
         secure: false,
@@ -32,14 +33,19 @@ async function sendEmail(config, code) {
         text, // plain text body
         html: `<b>${text}</b>`, // html body
       });
-	console.log("Message sent: %s", info.messageId);
+	console.log("Message sent - messageId: %s", info.messageId);
 }
 function errorHandler(config, error) {
-    console.log('error', error);
-    if (config.lastCode !== error.code) {
-        sendEmail(config, error.code);
+	let code = 0
+	if (error.response && error.response.status) {
+		code = error.response.status;
+	}
+	const wasFailing = config.failing || false;
+	if (!wasFailing) {
+		console.log('errorHandler() - calling sendEmail');
+        sendEmail(config, code, error.message);
     }
-    config.lastCode = error.code;
+    config.failing = true;
 }
 
 async function checkStatus(config) {
